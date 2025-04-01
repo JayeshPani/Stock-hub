@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock Hub - Staff Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="container">
+    <div class="logo">Stock Hub</div>
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul id="nav-menu">
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#inventory">Inventory</a></li>
+        <li><a href="#orders">Orders</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#reports">Reports</a></li>
+        <li><a href="#logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <!-- Dashboard Section (Hero) -->
+  <section class="hero" id="dashboard">
+    <div class="hero-content">
+      <h1>Welcome to Stock Hub</h1>
+      <p>Manage your stock efficiently and effortlessly.</p>
+      <button class="btn" onclick="scrollToSection('inventory')">View Inventory</button>
+    </div>
+  </section>
+  
+  <!-- Inventory Section -->
+  <section class="inventory container" id="inventory">
+    <h2>Current Inventory</h2>
+    <button class="btn scan-btn">Scan Barcode</button>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Item Name</th>
+          <th>Stock</th>
+          <th>Expiration</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Widget A</td>
+          <td>50</td>
+          <td>2025-06-15</td>
+          <td>In Stock</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Gadget B</td>
+          <td>5</td>
+          <td>2025-04-01</td>
+          <td class="low-stock">Low Stock</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Component C</td>
+          <td>0</td>
+          <td>2025-03-20</td>
+          <td class="out-stock">Out of Stock</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- View Orders Section -->
+  <section class="orders container" id="orders">
+    <h2>View Orders</h2>
+    <div class="order-management">
+      <div class="order-filters">
+        <select id="status-filter">
+          <option value="all">All Orders</option>
+          <option value="processing">Processing</option>
+          <option value="shipped">Shipped</option>
+          <option value="delivered">Delivered</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+        <input type="text" id="customer-search" placeholder="Search by customer...">
+        <button class="btn" id="search-btn">Search</button>
+      </div>
+      <div class="order-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Order Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="order-table">
+            <tr>
+              <td>1</td>
+              <td>John Doe</td>
+              <td>Widget A (2), Gadget B (1)</td>
+              <td>2025-03-30</td>
+              <td>Processing</td>
+              <td>
+                <select class="status-update">
+                  <option value="processing" selected>Processing</option>
+                  <option value="shipped">Shipped</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+                <button class="btn small-btn update-btn">Update</button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jane Smith</td>
+              <td>Component C (5)</td>
+              <td>2025-03-29</td>
+              <td>Shipped</td>
+              <td>
+                <select class="status-update">
+                  <option value="processing">Processing</option>
+                  <option value="shipped" selected>Shipped</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+                <button class="btn small-btn update-btn">Update</button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Robert Johnson</td>
+              <td>Widget A (1)</td>
+              <td>2025-03-28</td>
+              <td>Delivered</td>
+              <td>
+                <select class="status-update">
+                  <option value="processing">Processing</option>
+                  <option value="shipped">Shipped</option>
+                  <option value="delivered" selected>Delivered</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+                <button class="btn small-btn update-btn">Update</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Products Section -->
+  <section class="products container" id="products">
+    <h2>Product Management</h2>
+    <div class="product-management">
+      <form id="product-form">
+        <input type="text" id="product-name" placeholder="Product Name" required>
+        <input type="number" id="product-stock" placeholder="Stock Quantity" required>
+        <button type="submit" class="btn">Add Product</button>
+      </form>
+      <div class="product-list">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Product Name</th>
+              <th>Stock</th>
+            </tr>
+          </thead>
+          <tbody id="product-table">
+            <!-- New product rows will appear here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Reports Section -->
+  <section class="reports container" id="reports">
+    <h2>Analytics & Reports</h2>
+    <div class="report-controls">
+      <button class="btn export-btn">Export PDF</button>
+      <button class="btn export-btn">Export Excel</button>
+      <button class="btn export-btn">Export CSV</button>
+    </div>
+    <p>Coming soon: Detailed analytics to help you make data-driven decisions.</p>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="container" id="logout">
+    <div class="footer-content">
+      <div class="footer-left">
+        <h4>Contact</h4>
+        <p>Email: support@stockhub.com</p>
+        <p>Phone: +1234567890</p>
+      </div>
+      <div class="footer-right">
+        <h4>Follow Us</h4>
+        <ul class="footer-links">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 Stock Hub. All Rights Reserved.</p>
+  </footer>
+  
+  <script src="staff_script.js"></script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - Stock Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* Full-screen background image */
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #eee;
+      background: url('https://images.unsplash.com/photo-1614850523459-c2f4c699c52e') no-repeat center center fixed;
+      background-size: cover;
+    }
+    
+    /* Overlay to darken the background for better contrast */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+    
+    /* Wrapper for company name and auth container */
+    .auth-wrapper {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 400px;
+      padding: 0 20px;
+    }
+    
+    /* Company name styling */
+    .company-name {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #1e90ff;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    }
+    
+    /* Auth container styling */
+    .auth-container {
+      background: rgba(31, 31, 31, 0.9);
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+    }
+    
+    /* User type selection styling */
+    .user-type-selection {
+      padding: 30px;
+    }
+    
+    .user-type-selection h2 {
+      margin-bottom: 20px;
+      font-size: 1.5em;
+    }
+    
+    .user-type-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    /* Auth forms container */
+    .auth-forms {
+      padding: 30px;
+    }
+    
+    /* Back button */
+    .back-btn {
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.9em;
+    }
+    
+    .back-btn:hover {
+      background: #444;
+    }
+    
+    /* User type indicator */
+    .user-type-indicator {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 500;
+      font-size: 1.2em;
+      color: #1e90ff;
+    }
+    
+    /* Auth tabs */
+    .auth-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      overflow: hidden;
+      border: 1px solid #444;
+    }
+    
+    .auth-tab {
+      flex: 1;
+      padding: 10px;
+      background: #333;
+      color: #eee;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 1em;
+    }
+    
+    .auth-tab.active {
+      background: #1e90ff;
+      font-weight: 500;
+    }
+    
+    /* Form styling */
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      text-align: left;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #2a2a2a;
+      color: #eee;
+      font-size: 1em;
+    }
+    
+    .form-group input:focus {
+      outline: 2px solid #1e90ff;
+    }
+    
+    /* Button styling */
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background: #1e90ff;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 1em;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(30, 144, 255, 0.4);
+    }
+    
+    /* Auth links */
+    .auth-links {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+    
+    .auth-links a {
+      color: #1e90ff;
+      text-decoration: none;
+    }
+    
+    .auth-links a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .auth-wrapper {
+        padding: 0 15px;
+      }
+      
+      .auth-forms {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Overlay -->
+  <div class="overlay"></div>
+
+  <div class="auth-wrapper">
+    <!-- Company Name -->
+    <div class="company-name">Stock Hub</div>
+    
+    <!-- Auth Container -->
+    <div class="auth-container">
+      <!-- User Type Selection (initially visible) -->
+      <div id="user-type-selection" class="user-type-selection">
+        <h2>Select Account Type</h2>
+        <div class="user-type-buttons">
+          <button type="button" class="btn" onclick="showAuthForms('customer')">
+            <i class="fas fa-user"></i> Customer
+          </button>
+          <button type="button" class="btn" onclick="showAuthForms('staff')">
+            <i class="fas fa-user-tie"></i> Staff
+          </button>
+        </div>
+      </div>
+      
+      <!-- Auth Forms (initially hidden) -->
+      <div id="auth-forms" class="auth-forms" style="display: none;">
+        <button type="button" class="back-btn" onclick="showUserTypeSelection()">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        
+        <div id="user-type-indicator" class="user-type-indicator"></div>
+        
+        <div class="auth-tabs">
+          <button type="button" class="auth-tab active" onclick="toggleAuthForm('login')">Login</button>
+          <button type="button" class="auth-tab" onclick="toggleAuthForm('signup')">Sign Up</button>
+        </div>
+        
+        <!-- Login Form -->
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" required>
+          </div>
+          <button type="submit" class="btn">Login</button>
+          <div class="auth-links">
+            <a href="#">Forgot password?</a>
+          </div>
+        </form>
+        
+        <!-- Signup Form (initially hidden) -->
+        <form id="signup-form" style="display: none;">
+          <div class="form-group">
+            <label for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" required>
+          </div>
+          <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" required>
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" required>
+          </div>
+          <div class="form-group">
+            <label for="signup-confirm">Confirm Password</label>
+            <input type="password" id="signup-confirm" required>
+          </div>
+          <button type="submit" class="btn">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Store the selected user type
+    let selectedUserType = '';
+    
+    // Function to show auth forms and hide user type selection
+    function showAuthForms(userType) {
+      document.getElementById('user-type-selection').style.display = 'none';
+      document.getElementById('auth-forms').style.display = 'block';
+      
+      // Set the user type indicator text
+      const userTypeIndicator = document.getElementById('user-type-indicator');
+      userTypeIndicator.textContent = userType === 'customer' ? 'Customer Account' : 'Staff Account';
+      
+      // Store the selected user type
+      selectedUserType = userType;
+    }
+    
+    // Function to go back to user type selection
+    function showUserTypeSelection() {
+      document.getElementById('user-type-selection').style.display = 'block';
+      document.getElementById('auth-forms').style.display = 'none';
+    }
+    
+    // Function to toggle between login and signup forms
+    function toggleAuthForm(formType) {
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+      const tabs = document.querySelectorAll('.auth-tab');
+      
+      if (formType === 'login') {
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+        tabs[0].classList.add('active');
+        tabs[1].classList.remove('active');
+      } else {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'block';
+        tabs[0].classList.remove('active');
+        tabs[1].classList.add('active');
+      }
+    }
+    
+    // Handle login form submission
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      
+      console.log(`Login attempt as ${selectedUserType} with email: ${email}`);
+      
+      // In a real application, you would validate credentials on the server
+      // For this demo, we'll just redirect based on user type
+      if (selectedUserType === 'customer') {
+        window.location.href = 'customer_index.html';
+      } else if (selectedUserType === 'staff') {
+        window.location.href = 'staff_index.html';
+      }
+    });
+    
+    // Handle signup form submission
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const confirmPassword = document.getElementById('signup-confirm').value;
+      
+      if (password !== confirmPassword) {
+        alert("Passwords don't match!");
+        return;
+      }
+      
+      console.log(`Sign up attempt as ${selectedUserType} with name: ${name}, email: ${email}`);
+      alert(`Account created successfully! Please log in.`);
+      
+      // Switch back to login form
+      toggleAuthForm('login');
+    });
+  </script>
+</body>
+</html>

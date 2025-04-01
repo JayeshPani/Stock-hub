@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock Hub - Customer Portal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="container">
+    <div class="logo">Stock Hub</div>
+    <nav>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul id="nav-menu">
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#inventory">Inventory</a></li>
+        <li><a href="#orders">Orders</a></li>
+        <li><a href="#returns">Returns</a></li>
+        <li><a href="#logout">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <!-- Dashboard Section (Hero) -->
+  <section class="hero" id="dashboard">
+    <div class="hero-content">
+      <h1>Welcome to Stock Hub</h1>
+      <p>Manage your orders efficiently and effortlessly.</p>
+      <button class="btn" onclick="scrollToSection('inventory')">View Inventory</button>
+    </div>
+  </section>
+  
+  <!-- Inventory Section -->
+  <section class="inventory container" id="inventory">
+    <h2>Available Products</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Item Name</th>
+          <th>Price</th>
+          <th>Expiration</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Widget A</td>
+          <td>$49.99</td>
+          <td>2025-06-15</td>
+          <td>In Stock</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Gadget B</td>
+          <td>$129.99</td>
+          <td>2025-04-01</td>
+          <td class="low-stock">Low Stock</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Component C</td>
+          <td>$19.99</td>
+          <td>2025-03-20</td>
+          <td class="out-stock">Out of Stock</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- Order Management Section -->
+  <section class="orders container" id="orders">
+    <h2>Order Management</h2>
+    <div class="order-management">
+      <form id="order-form">
+        <input type="text" id="order-customer" placeholder="Customer Name" required>
+        <input type="text" id="order-items" placeholder="Items (comma separated)" required>
+        <button type="submit" class="btn">Create Order</button>
+      </form>
+      <div class="order-list">
+        <h3>Your Orders</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="order-table">
+            <!-- Example order -->
+            <tr>
+              <td>1</td>
+              <td>John Doe</td>
+              <td>Widget A (2), Gadget B (1)</td>
+              <td>Processing</td>
+              <td>
+                <button class="btn small-btn cancel-btn" data-order-id="1">
+                  <i class="fas fa-times"></i> Cancel
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>John Doe</td>
+              <td>Component C (3)</td>
+              <td>Shipped</td>
+              <td>
+                <button class="btn small-btn track-btn" data-order-id="2">
+                  <i class="fas fa-truck"></i> Track
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>John Doe</td>
+              <td>Widget A (1)</td>
+              <td>Delivered</td>
+              <td>
+                <button class="btn small-btn return-btn" data-order-id="3">
+                  <i class="fas fa-undo"></i> Return
+                </button>
+              </td>
+            </tr>
+            <!-- New orders will appear here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Returns Section -->
+  <section class="returns container" id="returns">
+    <h2>Returns & Refunds</h2>
+    <div class="returns-management">
+      <form id="return-form">
+        <select id="return-order" required>
+          <option value="">Select Order to Return</option>
+          <option value="3">Order #3 - Widget A (1)</option>
+          <option value="4">Order #4 - Gadget B (2)</option>
+        </select>
+        <select id="return-reason" required>
+          <option value="">Select Reason for Return</option>
+          <option value="damaged">Item Damaged</option>
+          <option value="wrong">Wrong Item Received</option>
+          <option value="notneeded">No Longer Needed</option>
+          <option value="other">Other Reason</option>
+        </select>
+        <textarea id="return-comments" placeholder="Additional Comments"></textarea>
+        <button type="submit" class="btn">Submit Return Request</button>
+      </form>
+      
+      <div class="returns-list">
+        <h3>Your Return Requests</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Return ID</th>
+              <th>Order ID</th>
+              <th>Items</th>
+              <th>Reason</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="returns-table">
+            <!-- Example return -->
+            <tr>
+              <td>1</td>
+              <td>3</td>
+              <td>Widget A (1)</td>
+              <td>Item Damaged</td>
+              <td>Pending</td>
+            </tr>
+            <!-- New returns will appear here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="container" id="logout">
+    <div class="footer-content">
+      <div class="footer-left">
+        <h4>Contact</h4>
+        <p>Email: support@stockhub.com</p>
+        <p>Phone: +1234567890</p>
+      </div>
+      <div class="footer-right">
+        <h4>Follow Us</h4>
+        <ul class="footer-links">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="copyright">&copy; 2025 Stock Hub. All Rights Reserved.</p>
+  </footer>
+  
+  <script src="customer_script.js"></script>
+</body>
+</html>

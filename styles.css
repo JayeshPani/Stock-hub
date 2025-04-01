@@ -1,0 +1,443 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #121212;
+    color: #eee;
+    line-height: 1.6;
+    /* Custom cursor with concentric circles */
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='16' cy='16' r='14' stroke='cyan' stroke-width='2' fill='none'/><circle cx='16' cy='16' r='8' stroke='cyan' stroke-width='2' fill='none'/></svg>") 16 16, auto;
+  }
+  a {
+    color: #1e90ff;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+  a:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Container */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1f1f1f;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #1e90ff;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+  }
+  nav ul li {
+    margin-left: 20px;
+  }
+  nav ul li a {
+    font-size: 1em;
+    transition: color 0.3s;
+  }
+  nav ul li a:hover {
+    color: #fff;
+  }
+  
+  /* Hamburger Menu */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .hamburger span {
+    height: 3px;
+    width: 25px;
+    background: #fff;
+    margin-bottom: 4px;
+    border-radius: 5px;
+  }
+  
+  /* Hero Section (Dashboard) */
+  .hero {
+    background: url('https://images.unsplash.com/photo-1542744095-291d1f67b221?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+    height: 80vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+  }
+  .hero-content {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+  }
+  .hero-content h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+  }
+  .btn {
+    padding: 10px 30px;
+    background: #1e90ff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px 5px #1e90ff;
+    background: #0d6efd;
+  }
+  
+  /* Inventory Section */
+  .inventory {
+    padding: 40px 0;
+    background: #181818;
+  }
+  .inventory h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .scan-btn {
+    margin: 0 auto 20px;
+    display: block;
+  }
+  .inventory table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  .inventory th, .inventory td {
+    padding: 12px 15px;
+    border: 1px solid #333;
+    text-align: left;
+  }
+  .low-stock {
+    color: #ff4d4d;
+  }
+  .out-stock {
+    color: #ff1a1a;
+  }
+  
+  /* Orders Section */
+  .orders {
+    padding: 40px 0;
+    background: #1e1e1e;
+  }
+  .orders h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .order-management {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  #order-form {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  #order-form input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #2a2a2a;
+    color: #eee;
+  }
+  #order-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #1e90ff;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  #order-form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px 5px #1e90ff;
+  }
+  .order-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .order-list th, .order-list td {
+    padding: 12px 15px;
+    border: 1px solid #333;
+    text-align: left;
+  }
+  
+  /* Products Section */
+  .products {
+    padding: 40px 0;
+    background: #1a1a1a;
+  }
+  .products h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .product-management {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  #product-form {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  #product-form input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #2a2a2a;
+    color: #eee;
+  }
+  #product-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #1e90ff;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  #product-form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px 5px #1e90ff;
+  }
+  .product-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .product-list th, .product-list td {
+    padding: 12px 15px;
+    border: 1px solid #333;
+    text-align: left;
+  }
+  
+  /* Reports Section */
+  .reports {
+    padding: 40px 0;
+    background: #181818;
+    text-align: center;
+  }
+  .reports h2 {
+    margin-bottom: 20px;
+  }
+  .report-controls {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  /* Footer */
+  footer {
+    background: #1f1f1f;
+    padding: 20px;
+    font-size: 0.9em;
+  }
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .footer-left, .footer-right {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px 0;
+  }
+  .footer-left h4, .footer-right h4 {
+    margin-bottom: 10px;
+  }
+  .footer-links {
+    list-style: none;
+    padding: 0;
+  }
+  .footer-links li {
+    margin-bottom: 5px;
+  }
+  .footer-links li a {
+    color: #1e90ff;
+  }
+  .footer-links li a:hover {
+    text-decoration: underline;
+  }
+  copyright, .copyright {
+    text-align: center;
+    margin-top: 20px;
+  }
+  /* Order Filters */
+.order-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.order-filters select,
+.order-filters input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #2a2a2a;
+  color: #eee;
+}
+
+.order-filters select {
+  min-width: 150px;
+}
+
+.order-filters input {
+  flex: 1;
+}
+
+/* Status Update Dropdown and Button */
+.status-update {
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+  background: #2a2a2a;
+  color: #eee;
+  margin-right: 5px;
+}
+
+.small-btn {
+  padding: 5px 10px;
+  font-size: 0.8em;
+}
+/* Returns Section */
+.returns {
+  padding: 40px 0;
+  background: #1a1a1a;
+}
+
+.returns h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.returns-management {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+#return-form {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#return-form select,
+#return-form textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #2a2a2a;
+  color: #eee;
+}
+
+#return-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.returns-list h3,
+.order-list h3 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Action Buttons */
+.small-btn {
+  padding: 5px 10px;
+  font-size: 0.8em;
+  margin-right: 5px;
+}
+
+.cancel-btn {
+  background: #ff4d4d;
+}
+
+.cancel-btn:hover {
+  background: #ff3333;
+  box-shadow: 0 0 20px 5px #ff4d4d;
+}
+
+.track-btn {
+  background: #1e90ff;
+}
+
+.return-btn {
+  background: #ff9900;
+}
+
+.return-btn:hover {
+  background: #ff8800;
+  box-shadow: 0 0 20px 5px #ff9900;
+}
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav ul {
+      flex-direction: column;
+      display: none;
+      width: 100%;
+    }
+    nav ul.active {
+      display: flex;
+    }
+    .hamburger {
+      display: flex;
+    }
+    #order-form, #product-form {
+      flex-direction: column;
+    }
+  }
+  
